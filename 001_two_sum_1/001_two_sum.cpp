@@ -10,25 +10,28 @@ class Solution {
 public:
     vector<int> twoSum(vector<int>& nums, int target) 
     {
-        unordered_map<int,int> m;
+        unordered_map<int,int> value_index_map;
         
-        m[nums[0]] = 0;
+        value_index_map[nums[0]] = 0;
         for (int i = 1; i < (int)nums.size(); i ++) 
         {
 
-            int pairValue = target - nums[i];
-            if (m.find(pairValue) != m.end()) //m.count(pairValue) > 0
+            int pair_value = target - nums[i];
+            //unordered_map<int,int>::iterator 
+            auto it = value_index_map.find(pair_value);
+            if (it != value_index_map.end()) //m.count(pairValue) > 0
             {
-                int arr[] = {m[pairValue], i};
-                vector<int> v(arr, arr + sizeof(arr)/sizeof(arr[0]));
-                return v;
+                int arr[] = {it->second, i};
+                vector<int> ret(arr, end(arr));
+                return ret;
             } else {
                 //m[nums[i]] = i;
-                m.insert(unordered_map<int, int>::value_type(nums[i], i));
+                //unordered_map<int, int>::value_type
+                value_index_map.insert(make_pair(nums[i], i));
             }
         }
-        vector<int> v;
-        return v;
+        vector<int> ret;
+        return ret;
     }
 };
 
